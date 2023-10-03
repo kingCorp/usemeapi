@@ -33,10 +33,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/home", (req, res, next) => {
+app.use("/", (req, res, next) => {
   res.status(200).json({
     code: "201",
-    message: "All data",
+    message: "Whatsapp web api",
     data: { name: "james" },
   });
 });
