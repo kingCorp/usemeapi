@@ -33,7 +33,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", (req, res, next) => {
+app.get("/", (req, res, next) => {
   res.status(200).json({
     code: "201",
     message: "Whatsapp web api",
@@ -46,7 +46,6 @@ app.get("/webhook", (req, res, next) => {
   let challenge = req.query("hub.challenge");
   let token = req.query("hub.verify_token");
 
-//   const myToken = "";
   if (mode && token) {
     if (mode === "subscribe" && token === myToken) {
       res.status(200).send(challenge);
