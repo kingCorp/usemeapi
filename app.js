@@ -6,7 +6,7 @@ const { default: axios } = require("axios");
 
 const app = express();
 const token = process.env.TOKEN;
-const myToken = process.env.MYTOKEN
+const myToken = process.env.MYTOKEN;
 
 const router = express.Router();
 
@@ -45,7 +45,7 @@ app.get("/webhook", (req, res, next) => {
   let mode = req.query("hub.mode");
   let challenge = req.query("hub.challenge");
   let token = req.query("hub.verify_token");
-
+  console.log(challenge, token, mode);
   if (mode && token) {
     if (mode === "subscribe" && token === myToken) {
       res.status(200).send(challenge);
@@ -91,8 +91,8 @@ app.post("/webhook", (req, res, next) => {
       });
 
       res.sendStatus(200);
-    }else{
-        res.sendStatus(404)
+    } else {
+      res.sendStatus(404);
     }
   }
 });
