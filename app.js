@@ -56,20 +56,22 @@ app.get("/webhook", (req, res, next) => {
 });
 
 app.post("/webhook", (req, res, next) => {
-  let body_params = req.body;
-  console.log(JSON.stringify(body_params, null, 2));
+  let body_param = req.body;
+  console.log(JSON.stringify(body_param, null, 2));
 
-  if (body_params.object) {
+  if (body_param.object) {
+    console.log("gets here one");
     if (
-      body_params.entry &&
-      body_params.entry[0].changes[0].value.messages &&
-      body_params.entry[0].changes[0].value.messages[0]
+      body_param.entry &&
+      body_param.entry[0].changes[0].value.messages &&
+      body_param.entry[0].changes[0].value.messages[0]
     ) {
-      let phone_numhber_id =
-        body_params.entry[0].changes[0].value.metadata.phone_number_id;
-      let from = body_params.entry[0].changes[0].value.messages[0].from;
-      let msg_body =
-        body_params.entry[0].changes[0].value.messages[0].text.body;
+        let phone_numhber_id =
+        body_param.entry[0].changes[0].value.metadata.phone_number_id;
+        let from = body_param.entry[0].changes[0].value.messages[0].from;
+        let msg_body =
+        body_param.entry[0].changes[0].value.messages[0].text.body;
+        console.log("gets here two",phone_numhber_id,from,msg_body);
 
       axios({
         method: "POST",
@@ -89,7 +91,7 @@ app.post("/webhook", (req, res, next) => {
           "Content-Type": "application/json",
         },
       });
-
+      console.log("gets here three");
       res.sendStatus(200);
     } else {
       res.sendStatus(404);
